@@ -1,0 +1,13 @@
+bot:
+  title: בדיקה האם מותרת לך ההתרמת דם
+  hello: שלום
+  question: ?האם את/ה נוטל/ת תרופה מסוימת בקביעות
+  allowedDonation: ההתרמה מותרת
+  medicationsQuestion: ?איזה תרופות את/ה נוטל
+  noMedicationsFound: התרופה/ות לא נמצאה/ו במאגר
+  medicationInstructions: :הנחיות
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
