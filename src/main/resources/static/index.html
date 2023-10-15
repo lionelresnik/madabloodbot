@@ -1,99 +1,13 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" data-critters-container>
 <head>
+  <meta charset="utf-8">
   <title>בדיקה האם מותרת לך ההתרמת דם</title>
-  <link rel="icon" href="/resources/logo.png">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <style>
-        #chat {
-            height: 400px;
-            overflow-y: scroll;
-            text-align: right;
-            direction: rtl;
-        }
-        #message {
-            direction: rtl;
-        }
-        .loading {
-            animation: blink 1s linear infinite;
-        }
-        @keyframes blink {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
-       
-    </style>
-</head>
-<body class="container pt-5">
-<div id="chat" class="border rounded p-3 mb-3"></div>
-<form id="form" class="form-inline">
-  <input id="message" type="text" class="form-control flex-grow-1 mr-3">
-  <button type="submit" class="btn btn-primary">שלח</button>
-</form>
-<script>
-        var form = document.getElementById('form');
-        var messageInput = document.getElementById('message');
-        var chat = document.getElementById('chat');
-
-        function appendMessage(text, className) {
-            text.split('\n').forEach(function(line) {
-                var messageElement = document.createElement('p');
-                messageElement.textContent = line;
-                messageElement.className = className;
-                chat.appendChild(messageElement);
-            });
-            chat.scrollTop = chat.scrollHeight;
-        }
-
-        function sendMessage(message) {
-            appendMessage(message, 'user-message');
-            appendMessage('Loading...', 'loading');
-            fetch('http://localhost:8080/chat', {
-                method: 'POST',
-                headers: {'Content-Type': 'text/plain'},
-                body: message
-            })
-                .then(response => response.text())
-                .then(function(response) {
-                    var loadingMessage = chat.querySelector('.loading');
-                    loadingMessage.remove();
-                    appendMessage(response, 'bot-message');
-                });
-        }
-
-        function sendMedications(medications) {
-            appendMessage(medications.join(', '), 'user-message');
-            appendMessage('Loading...', 'loading');
-            fetch('http://localhost:8080/chat/medications', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(medications)
-            })
-                .then(response => response.text())
-                .then(function(response) {
-                    var loadingMessage = chat.querySelector('.loading');
-                    loadingMessage.remove();
-                    appendMessage(response, 'bot-message');
-                });
-        }
-
-        fetch('http://localhost:8080/chat')
-            .then(response => response.text())
-            .then(response => appendMessage(response, 'bot-message'));
-
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            var message = messageInput.value;
-            messageInput.value = '';
-               if (message.trim() === '') {
-                 return;
-              }
-            if (chat.lastChild.textContent === '?איזה תרופות את/ה נוטל') {
-                sendMedications(message.split(/[\s,\.]+/));
-            } else {
-                sendMessage(message);
-            }
-        });
-    </script>
-</body>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<style>@import"https://fonts.googleapis.com/css2?family=Assistant:wght@700&family=Heebo:wght@400;700&family=Inter:wght@600&family=Lato&family=Mulish:wght@600&display=swap";html,body{height:100vh;margin:0;padding:0}</style><link rel="stylesheet" href="styles.68c3d0c5fc36b66f.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.68c3d0c5fc36b66f.css"></noscript></head>
+<body>
+  <app-root></app-root>
+<script src="runtime.41b273c8a6e15630.js" type="module"></script><script src="polyfills.e94916ca437d674a.js" type="module"></script><script src="main.963e5cdc16b0dee1.js" type="module"></script></body>
 </html>
