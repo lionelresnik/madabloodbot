@@ -23,11 +23,11 @@ public class MedicationService {
                     new CsvToBeanBuilder<Medication>(reader).withType(Medication.class).build().parse();
 
             for (Medication medication : medications) {
-                if (medicationNames.contains(medication.getHebrewName()) ||
-                    medicationNames.contains(medication.getEnglishName().toLowerCase()) ||
-                    medicationNames.contains(medication.getEnglishName().toUpperCase()) ||
-                    medicationNames.contains(medication.getGenericName())) {
-                    instructions.put(medication.getHebrewName(), medication.getInstructions());
+                if (medicationNames.contains(medication.getHebrew()) ||
+                    medicationNames.contains(medication.getEnglish().toLowerCase()) ||
+                    medicationNames.contains(medication.getEnglish().toUpperCase()) ||
+                    medicationNames.contains(medication.getGeneric())) {
+                    instructions.put(medication.getHebrew(), medication.getInstructions());
                 }
             }
         }
