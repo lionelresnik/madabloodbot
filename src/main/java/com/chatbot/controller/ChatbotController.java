@@ -2,6 +2,7 @@ package com.chatbot.controller;
 
 import com.chatbot.model.Medication;
 import com.chatbot.service.MedicationService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.univocity.parsers.csv.CsvParserSettings;
 import com.univocity.parsers.csv.CsvRoutines;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -77,6 +83,7 @@ public class ChatbotController {
         }
     }
 
+
     @PostMapping(value = "/convert", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Map<String, List<Medication>> convertCsvToJson(@RequestParam("file") MultipartFile file) throws IOException {
         CsvParserSettings settings = new CsvParserSettings();
@@ -89,9 +96,37 @@ public class ChatbotController {
             Map<String, List<Medication>> response = new HashMap<>();
             response.put("medications", medications);
 
+            // Convert object to JSON string
+            ObjectMapper mapper     = new ObjectMapper();
+            String       jsonString = mapper.writeValueAsString(response);
+
+            // Define the path to the file
+            Path path = Paths.get("src/main/resources/medications.json");
+
+            // Check if file already exists
+            if (Files.exists(path)) {
+                // Get today's date and use it to create a new directory
+                String today  = LocalDate.now().toString();
+                Path   newDir = Paths.get("src/main/resources/" + today);
+
+                // Create the directory if it doesn't exist
+                if (!Files.exists(newDir)) {
+                    Files.createDirectories(newDir);
+                }
+
+                // Get the files in the directory
+                AtomicInteger counter = new AtomicInteger(1);
+                Files.list(newDir).forEach(existingFile -> counter.getAndIncrement());
+
+                // Rename the old file
+                Files.move(path, newDir.resolve("medications." + counter.get() + ".json"));
+            }
+
+            // Write the JSON string to the file
+            Files.write(path, jsonString.getBytes());
+
             return response;
         }
     }
-
 
 }
