@@ -1,6 +1,6 @@
-# Java Spring Mada-Bot Project
+# Java Spring Mada-Blood-Bot Project
 
-This project is a simple chatbot implemented using Java and the Spring framework. The mada-bot uses a finite state machine (FSM) to manage the conversation flow and can ask different questions based on the user's responses.
+This project is a simple chatbot implemented using Java and the Spring framework. The mada-blood-bot uses a finite state machine (FSM) to manage the conversation flow and can ask different questions based on the user's responses.
 
 ## Project Structure
 
