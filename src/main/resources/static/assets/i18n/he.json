@@ -17,7 +17,7 @@
             "FEEL_GOOD_LAST_THREE_DAYS": "<b>האם הרגשת טוב ב-3 ימים האחרונים?</b>",
             "MEDICATION_REGULAR_OR_LAST_MONTH": "האם אתה נוטל תרופות באופן קבוע?",
             "MEDICATION_LIST_CHOICE": "אנא ציין בבקשה את שמות התרופות, אם אפשר עדיף באנגלית לפי מה שכתוב על האריזה",
-            "MEDICATION_SPECIFIC_LIST": "האם נטלת בעבר או לאחרונה אחת מהתרופות הבאות?<br><br>FINASTERIDE - פרופסיה , פרואבניר, פרוקיור<br>ISOTRETINOIN - רואקוטן, קוראטן<br>DUTASTERIDE - אבודארט, דואדרט, ערמוניה<br>ACITRETIN -נאוטיגזון<br>ATRITENT - טיגזון",
+            "MEDICATION_SPECIFIC_LIST": "האם נטלת בעבר או לאחרונה אחת מהתרופות הבאות?<br><br>FINASTERIDE - פרופסיה , פרואבניר, פרוקיור<br>ISOTRETINOIN - רואקוטן, קוראטן<br>DUTASTERIDE - אבודארט, דואדרט, ערמוניה<br>ACITRETIN - נאוטיגזון<br>ATRITENT - טיגזון",
             "BACKGROUND_DISEASE_KNOWN": "האם יש לך ברקע <b>אחד</b> מהמצבים הרפואיים הבאים:<br><ol><li>מחלת לב - צנטור או ניתוח מעקפים ברקע, הפרעת קצב, מחלת לב מולדת, בעיה במסתמי הלב.</li><li>ממאירות (סרטן)</li><li>המופיליה</li><li>אפילפסיה (פרכוסים, מחלת הנפילה) </li></ol>",
             "DONATED_IN_LAST_3_MONTHS": "האם תרמת דם או מוצרי דם (פלסמה, טסיות) בשלושת החודשים האחרונים?",
             "DENTAL_TREATMENT_LAST_WEEK": "האם עברת טיפול שיניים מורכב בשבוע האחרון?",
@@ -25,8 +25,8 @@
             "SPECIFIC_ACTIVITY_LAST_12_HOURS": "האם עיסוקך כולל אחד מהבאים ב 12 השעות הבאות?<br> 1. נהיגה ברכב ציבורי<br>2. הפעלת מנוף<br>3. עבודה בגובה",
             "WEIGHT_LESS_THAN_50_KG": "האם משקלך נמוך מ 50 קג?",
             "VEGAN_VEGETARIAN": "האם הנך צמחוני או טבעוני?",
-            "QUALIFIED": "נראה שנמצאת מתאים לתרומת דם 💪<br><br>🩸 למיקומי התרמות דם ברחבי הארץ:  <a href='https://www.mdais.org/blood-donation' target='_blank'>לחצו כאן</a><br>🗓 ️לקביעת תור לתרומת דם:  <a href='https://bd.mda.org.il/' target='_blank'>לחצו כאן</a><br><br>לקבלת התראות על מיקומי התרמות דם דרך הפייסבוק לחצו: <a href='https://www.mdais.org/blood-donation/notification' target='_blank'>כאן</a><br><b>לפניות לשירותי הדם של מד\"א</b>:<br>בוואצאפ: <a href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>",
-            "DISQUALIFIED": "תודה על הנכונות לתרום דם 🙏לצערנו, על פי תשובותיך נכון לעכשיו אין אפשרות לתרום מטעמים רפואיים.<br><br> לשאלות ותהיות נוספות אפשר לפנות למוקד שירותי הדם של מד״א:<br> בוואצאפ: <a href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>"
+            "QUALIFIED": "נראה שנמצאת מתאים לתרומת דם 💪<br><br>🩸 למיקומי התרמות דם ברחבי הארץ:  <a class='link' href='https://www.mdais.org/blood-donation' target='_blank'>לחצו כאן</a><br>🗓 ️לקביעת תור לתרומת דם:  <a class='link' href='https://bd.mda.org.il/' target='_blank'>לחצו כאן</a><br><br>לקבלת התראות על מיקומי התרמות דם דרך הפייסבוק לחצו: <a class='link' href='https://www.mdais.org/blood-donation/notification' target='_blank'>כאן</a><br><b>לפניות לשירותי הדם של מד\"א</b>:<br>בוואצאפ: <a class='link' href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a class='link' href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>",
+            "DISQUALIFIED": "תודה על הנכונות לתרום דם 🙏<br><br>לצערנו, על פי תשובותיך נכון לעכשיו אין אפשרות לתרום מטעמים רפואיים.<br><br> לשאלות ותהיות נוספות אפשר לפנות למוקד שירותי הדם של מד״א:<br> בוואצאפ: <a class='link' href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a class='link' href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>"
         },
         "FEMALE": {
             "GENDER": "היי ותודה על הנכונות שלכם לתרום דם ולהציל חיים.<br><br>אנא ציינו את המין שלכם על מנת שהשאלות יוצגו בהתאם.",
@@ -34,7 +34,7 @@
             "FEEL_GOOD_LAST_THREE_DAYS": "<b>האם הרגשת טוב ב-3 ימים האחרונים?</b>",
             "MEDICATION_REGULAR_OR_LAST_MONTH": "האם את נוטלת תרופות באופן קבוע?",
             "MEDICATION_LIST_CHOICE": "אנא צייני בבקשה את שמות התרופות, אם אפשר עדיף באנגלית לפי מה שכתוב על האריזה",
-            "MEDICATION_SPECIFIC_LIST": "האם נטלת בעבר או לאחרונה אחת מהתרופות הבאות?<br><br>FINASTERIDE - פרופסיה , פרואבניר, פרוקיור<br>ISOTRETINOIN - רואקוטן, קוראטן<br>DUTASTERIDE - אבודארט, דואדרט, ערמוניה<br>ACITRETIN -נאוטיגזון<br>ATRITENT - טיגזון",
+            "MEDICATION_SPECIFIC_LIST": "האם נטלת בעבר או לאחרונה אחת מהתרופות הבאות?<br><br>FINASTERIDE - פרופסיה , פרואבניר, פרוקיור<br>ISOTRETINOIN - רואקוטן, קוראטן<br>DUTASTERIDE - אבודארט, דואדרט, ערמוניה<br>ACITRETIN - נאוטיגזון<br>ATRITENT - טיגזון",
             "BACKGROUND_DISEASE_KNOWN": "האם יש לך ברקע <b>אחד</b> מהמצבים הרפואיים הבאים:<br><ol><li>מחלת לב - צנטור או ניתוח מעקפים ברקע, הפרעת קצב, מחלת לב מולדת, בעיה במסתמי הלב.</li><li>ממאירות (סרטן)</li><li>המופיליה</li><li>אפילפסיה (פרכוסים, מחלת הנפילה) </li></ol>",
             "DONATED_IN_LAST_3_MONTHS": "האם תרמת דם או מוצרי דם (פלסמה, טסיות) בשלושת החודשים האחרונים?",
             "DENTAL_TREATMENT_LAST_WEEK": "האם עברת טיפול שיניים מורכב בשבוע האחרון?",
@@ -42,8 +42,8 @@
             "SPECIFIC_ACTIVITY_LAST_12_HOURS": "האם עיסוקך כולל אחד מהבאים ב 12 השעות הבאות?<br> 1. נהיגה ברכב ציבורי<br>2. הפעלת מנוף<br>3. עבודה בגובה",
             "WEIGHT_LESS_THAN_50_KG": "האם משקלך נמוך מ 50 קג?",
             "PREGNANCY": "האם הנך <b>בהריון</b> או ילדת ב <b>6 החודשים</b> האחרונים?",
-            "QUALIFIED": "נראה שנמצאת מתאימה לתרומת דם 💪<br><br>🩸 למיקומי התרמות דם ברחבי הארץ:  <a href='https://www.mdais.org/blood-donation' target='_blank'>לחצו כאן</a><br>🗓 ️לקביעת תור לתרומת דם:  <a href='https://bd.mda.org.il/' target='_blank'>לחצו כאן</a><br><br>לקבלת התראות על מיקומי התרמות דם דרך הפייסבוק לחצו: <a href='https://www.mdais.org/blood-donation/notification' target='_blank'>כאן</a><br><b>לפניות לשירותי הדם של מד\"א</b>:<br>בוואצאפ: <a href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>",
-            "DISQUALIFIED": "תודה על הנכונות לתרום דם 🙏לצערנו, על פי תשובותיך נכון לעכשיו אין אפשרות לתרום מטעמים רפואיים.<br><br> לשאלות ותהיות נוספות אפשר לפנות למוקד שירותי הדם של מד״א:<br> בוואצאפ: <a href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>"
+            "QUALIFIED": "נראה שנמצאת מתאימה לתרומת דם 💪<br><br>🩸 למיקומי התרמות דם ברחבי הארץ:  <a class='link' href='https://www.mdais.org/blood-donation' target='_blank'>לחצו כאן</a><br>🗓 ️לקביעת תור לתרומת דם:  <a class='link' href='https://bd.mda.org.il/' target='_blank'>לחצו כאן</a><br><br>לקבלת התראות על מיקומי התרמות דם דרך הפייסבוק לחצו: <a class='link' href='https://www.mdais.org/blood-donation/notification' target='_blank'>כאן</a><br><b>לפניות לשירותי הדם של מד\"א</b>:<br>בוואצאפ: <a class='link' href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a class='link' href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>",
+            "DISQUALIFIED": "תודה על הנכונות לתרום דם 🙏<br><br>לצערנו, על פי תשובותיך נכון לעכשיו אין אפשרות לתרום מטעמים רפואיים.<br><br> לשאלות ותהיות נוספות אפשר לפנות למוקד שירותי הדם של מד״א:<br> בוואצאפ: <a class='link' href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a class='link' href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>"
         }
     },
     "NOTICE": {
