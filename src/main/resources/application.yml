@@ -10,3 +10,6 @@ aws:
 medications:
   file:
     path: src/main/resources/medications.json
+logging:
+  level:
+    root: INFO
