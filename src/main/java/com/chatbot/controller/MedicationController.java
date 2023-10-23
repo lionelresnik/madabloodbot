@@ -2,11 +2,14 @@ package com.chatbot.controller;
 
 import com.chatbot.model.Medication;
 import com.chatbot.model.MedicationFindResult;
+import com.chatbot.service.AmazonS3Service;
 import com.chatbot.service.MedicationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.univocity.parsers.csv.CsvParserSettings;
 import com.univocity.parsers.csv.CsvRoutines;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +25,6 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Lionel Resnik
@@ -30,23 +32,44 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequestMapping("/api/chat")
-public class ChatbotController {
+public class MedicationController {
 
-    @Autowired
-    private MedicationService medicationService;
+    private static final Logger            log = LoggerFactory.getLogger(MedicationController.class);
+    private final        MedicationService medicationService;
+    private final        AmazonS3Service   amazonS3Service;
+    @Value("${aws.bucket.name}")
+    private              String            bucketName;
+    @Value("${medications.file.path}")
+    private              String            medicationsFilePath;
 
-    @PostMapping("/find")
-    public MedicationFindResult processMedications(@RequestBody List<String> medications) {
-        MedicationFindResult instructions = medicationService.findMedications(medications);
-        return instructions;
+    public MedicationController(MedicationService medicationService, AmazonS3Service amazonS3Service) {
+        this.medicationService = medicationService;
+        this.amazonS3Service = amazonS3Service;
     }
 
 
+    @PostMapping("/find")
+    public MedicationFindResult processMedications(@RequestBody List<String> medications) {
+        return medicationService.findMedications(medications);
+    }
+
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Map<String, List<Medication>> convertCsvToJson(@RequestParam("file") MultipartFile file) throws IOException {
-        List<Medication>              medications = parseCsvFile(file);
-        Map<String, List<Medication>> response    = saveFile(medications);
+        log.info("Received request to convert CSV to JSON");
+        List<Medication> medications = parseCsvFile(file);
         medicationService.fillInstructions();
+
+        String today = LocalDate.now().toString();
+
+        Map<String, List<Medication>> response = saveFile(medications, medicationsFilePath);
+        log.info("Successfully converted CSV to JSON");
+
+        // Upload the file to Amazon S3
+
+        Path path = Paths.get(medicationsFilePath);
+
+        amazonS3Service.uploadFile(bucketName, "medications.json", path);
+
         return response;
     }
 
@@ -60,7 +83,7 @@ public class ChatbotController {
         }
     }
 
-    private Map<String, List<Medication>> saveFile(List<Medication> medications) throws IOException {
+    private Map<String, List<Medication>> saveFile(List<Medication> medications, String today) throws IOException {
         Map<String, List<Medication>> response = new HashMap<>();
         response.put("medications", medications);
 
@@ -69,26 +92,7 @@ public class ChatbotController {
         String       jsonString = mapper.writeValueAsString(response);
 
         // Define the path to the file
-        Path path = Paths.get("src/main/resources/medications.json");
-
-        // Check if file already exists
-        if (Files.exists(path)) {
-            // Get today's date and use it to create a new directory
-            String today  = LocalDate.now().toString();
-            Path   newDir = Paths.get("src/main/resources/" + today);
-
-            // Create the directory if it doesn't exist
-            if (!Files.exists(newDir)) {
-                Files.createDirectories(newDir);
-            }
-
-            // Get the files in the directory
-            AtomicInteger counter = new AtomicInteger(1);
-            Files.list(newDir).forEach(existingFile -> counter.getAndIncrement());
-
-            // Rename the old file
-            Files.move(path, newDir.resolve("medications." + counter.get() + ".json"));
-        }
+        Path path = Paths.get(medicationsFilePath);
 
         // Write the JSON string to the file
         Files.write(path, jsonString.getBytes());

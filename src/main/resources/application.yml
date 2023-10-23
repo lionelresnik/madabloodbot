@@ -3,3 +3,12 @@ spring:
     encoding:
       charset: UTF-8
       force: true
+aws:
+  accessKeyId: ${AWS_ACCESS_KEY}
+  secretAccessKey: ${AWS_SECRET_KEY}
+  region: ${AWS_REGION}
+  bucket:
+    name: ${AWS_BUCKET_NAME}
+medications:
+  file:
+    path: src/main/resources/medications.json

@@ -7,10 +7,14 @@ import com.chatbot.model.MedicationNotFoundOutput;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.text.similarity.LevenshteinDistance;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -21,45 +25,71 @@ import java.util.*;
 @Service
 public class MedicationService {
 
-    private static final int INDEX_LENGTH = 3;
+    private static final Logger          log          = LoggerFactory.getLogger(MedicationService.class);
+    private static final int             INDEX_LENGTH = 3;
+    private final        AmazonS3Service amazonS3Service;
+    @Value("${aws.bucket.name}")
+    private              String          bucketName;
+    @Value("${medications.file.path}")
+    private              String          medicationsFilePath;
 
     private final Map<String, Medication>   hebrewInstructions  = new HashMap<>();
     private final Map<String, Medication>   englishInstructions = new HashMap<>();
     private final Map<String, Medication>   genericInstructions = new HashMap<>();
     private final Map<String, List<String>> index               = new HashMap<>();
 
+    public MedicationService(AmazonS3Service amazonS3Service) {
+        this.amazonS3Service = amazonS3Service;
+    }
+
     public void fillInstructions() throws IOException {
-        // Define the path to the file
-        Path path = Paths.get("src/main/resources/medications.json");
-
-        // Check if file exists
-        if (Files.exists(path)) {
-            // Create an ObjectMapper
-            ObjectMapper mapper = new ObjectMapper();
-
-            // Define the TypeReference for List<Medication>
-            TypeReference<HashMap<String, List<Medication>>> typeRef = new TypeReference<>() {
-            };
-
-            // Read the file and deserialize it into a list of Medication objects
-            HashMap<String, List<Medication>> response = mapper.readValue(path.toFile(), typeRef);
-
-            // Get the list of Medication objects
-            List<Medication> medications = response.get("medications");
-
-            // Fill the instruction maps
-            for (Medication medication : medications) {
-                hebrewInstructions.put(medication.getHebrew(), medication);
-                englishInstructions.put(medication.getEnglish().toLowerCase(), medication);
-                genericInstructions.put(medication.getGeneric().toLowerCase(), medication);
+        // Try to download the file from Amazon S3
+        try {
+            Path path = amazonS3Service.downloadFile(bucketName, "medications.json");
+            if (path != null) {
+                fillInstructionsFromFile(path);
             }
-
-            // Fill the index
-            index.clear();
-            addToIndex(hebrewInstructions.keySet());
-            addToIndex(englishInstructions.keySet());
-            addToIndex(genericInstructions.keySet());
+            else {
+                throw new NoSuchFileException("Path is null");
+            }
         }
+        catch (NoSuchFileException e) {
+            log.warn("Failed to download file from Amazon S3, using local file instead", e);
+
+            // If the download fails, use the local file
+            Path path = Paths.get(medicationsFilePath);
+            if (Files.exists(path)) {
+                fillInstructionsFromFile(path);
+            }
+        }
+    }
+
+    private void fillInstructionsFromFile(Path path) throws IOException {
+        // Create an ObjectMapper
+        ObjectMapper mapper = new ObjectMapper();
+
+        // Define the TypeReference for List<Medication>
+        TypeReference<HashMap<String, List<Medication>>> typeRef = new TypeReference<>() {
+        };
+
+        // Read the file and deserialize it into a list of Medication objects
+        HashMap<String, List<Medication>> response = mapper.readValue(path.toFile(), typeRef);
+
+        // Get the list of Medication objects
+        List<Medication> medications = response.get("medications");
+
+        // Fill the instruction maps
+        for (Medication medication : medications) {
+            hebrewInstructions.put(medication.getHebrew(), medication);
+            englishInstructions.put(medication.getEnglish().toLowerCase(), medication);
+            genericInstructions.put(medication.getGeneric().toLowerCase(), medication);
+        }
+
+        // Fill the index
+        index.clear();
+        addToIndex(hebrewInstructions.keySet());
+        addToIndex(englishInstructions.keySet());
+        addToIndex(genericInstructions.keySet());
     }
 
     private void addToIndex(Set<String> names) {
