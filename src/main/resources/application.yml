@@ -13,3 +13,7 @@ medications:
 logging:
   level:
     root: INFO
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
