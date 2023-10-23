@@ -4,11 +4,9 @@ spring:
       charset: UTF-8
       force: true
 aws:
-  accessKeyId: ${AWS_ACCESS_KEY}
-  secretAccessKey: ${AWS_SECRET_KEY}
-  region: ${AWS_REGION}
+  region: il-central-1
   bucket:
-    name: ${AWS_BUCKET_NAME}
+    name: blood-bucket-donation
 medications:
   file:
     path: src/main/resources/medications.json

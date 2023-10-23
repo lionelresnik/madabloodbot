@@ -9,8 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.core.exception.SdkClientException;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.core.sync.ResponseTransformer;
@@ -34,14 +32,10 @@ public class AmazonS3Service {
     private              S3Client s3;
 
 
-    public AmazonS3Service(@Value("${aws.accessKeyId}") String accessKeyId,
-                           @Value("${aws.secretAccessKey}") String secretAccessKey,
-                           @Value("${aws.region}") String region) {
-        AwsBasicCredentials awsCreds = AwsBasicCredentials.create(accessKeyId, secretAccessKey);
+    public AmazonS3Service(@Value("${aws.region}") String region) {
 
         try {
-            s3 = S3Client.builder().region(Region.of(region)).credentialsProvider(
-                    StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKeyId, secretAccessKey))).build();
+            s3 = S3Client.builder().region(Region.of(region)).build();
         }
         catch (SdkClientException e) {
             log.error("Failed to connect to Amazon S3: {}", e.getMessage());
