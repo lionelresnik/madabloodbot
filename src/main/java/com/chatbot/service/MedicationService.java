@@ -53,7 +53,7 @@ public class MedicationService {
                 throw new NoSuchFileException("Path is null");
             }
         }
-        catch (NoSuchFileException e) {
+        catch (Exception e) {
             log.warn("Failed to download file from Amazon S3, using local file instead", e);
 
             // If the download fails, use the local file
