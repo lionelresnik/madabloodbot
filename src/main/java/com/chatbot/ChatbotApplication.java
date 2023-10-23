@@ -1,6 +1,8 @@
 package com.chatbot;
 
 import com.chatbot.service.MedicationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,6 +14,8 @@ import java.io.IOException;
  */
 @SpringBootApplication
 public class ChatbotApplication {
+
+    private static final Logger log = LoggerFactory.getLogger(ChatbotApplication.class);
 
     private final MedicationService medicationService;
 
@@ -25,6 +29,7 @@ public class ChatbotApplication {
 
     @PostConstruct
     public void init() {
+        log.info("***running init*****");
         try {
             medicationService.fillInstructions();
         }
