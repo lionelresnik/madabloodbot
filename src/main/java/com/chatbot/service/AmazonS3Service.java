@@ -63,7 +63,7 @@ public class AmazonS3Service {
         }
         catch (SdkClientException e) {
             // Log the error and continue with the application
-            log.error("Failed to download file from Amazon S3", e);
+            log.error("Failed to upload file to Amazon S3", e);
         }
     }
 

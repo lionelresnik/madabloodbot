@@ -55,17 +55,24 @@ public class MedicationController {
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Map<String, List<Medication>> convertCsvToJson(@RequestParam("file") MultipartFile file) throws IOException {
         log.info("Received request to convert CSV to JSON");
+
+        log.info("Parsing file");
         List<Medication> medications = parseCsvFile(file);
-        medicationService.fillInstructions();
 
         Map<String, List<Medication>> response = saveFile(medications, medicationsFilePath);
-        log.info("Successfully converted CSV to JSON");
-
-        // Upload the file to Amazon S3
+        log.info("Saving file locally");
 
         Path path = Paths.get(medicationsFilePath);
+        log.info("creating path: " + path);
 
+        log.info("trying to upload file to s3");
         amazonS3Service.uploadFile(bucketName, "medications.json", path);
+
+        log.info("filling instructions from new file");
+        medicationService.fillInstructions();
+
+
+        log.info("Successfully done");
 
         return response;
     }
