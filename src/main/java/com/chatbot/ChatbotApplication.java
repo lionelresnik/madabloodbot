@@ -29,7 +29,7 @@ public class ChatbotApplication {
 
     @PostConstruct
     public void init() {
-        log.info("***running init*****");
+
         try {
             medicationService.fillInstructions();
         }
