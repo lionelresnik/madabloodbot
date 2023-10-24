@@ -1,26 +1,18 @@
 package com.chatbot.service;
 
-import io.github.resilience4j.retry.Retry;
-import io.github.resilience4j.retry.RetryConfig;
-import io.vavr.CheckedFunction1;
-import io.vavr.CheckedRunnable;
-import io.vavr.control.Try;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import software.amazon.awssdk.core.exception.SdkClientException;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.core.sync.ResponseTransformer;
-import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.S3Exception;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.Duration;
+import java.nio.file.Paths;
 
 
 /**
@@ -28,75 +20,45 @@ import java.time.Duration;
  */
 @Service
 public class AmazonS3Service {
-    private static final Logger   log = LoggerFactory.getLogger(AmazonS3Service.class);
-    private              S3Client s3;
+    private static final Logger   log    = LoggerFactory.getLogger(AmazonS3Service.class);
+    private static final Logger   logger = LoggerFactory.getLogger(AmazonS3Service.class);
+    private final        S3Client s3Client;
+    @Value("${medications.file.path}")
+    private              String   medicationsFilePath;
 
+    public AmazonS3Service(S3Client s3Client) {
+        this.s3Client = s3Client;
+    }
 
-    public AmazonS3Service(@Value("${aws.region}") String region) {
-
+    public boolean uploadFile(String bucketName, String key) {
+        Path path = Paths.get(medicationsFilePath);
         try {
-            s3 = S3Client.builder().region(Region.of(region)).build();
+            s3Client.putObject(PutObjectRequest.builder().bucket(bucketName).key(key).build(),
+                               RequestBody.fromFile(path));
+            logger.info("File uploaded successfully to bucket {} with key {}", bucketName, key);
+            return true;
         }
-        catch (SdkClientException e) {
-            log.error("Failed to connect to Amazon S3: {}", e.getMessage());
+        catch (S3Exception e) {
+            logger.error("Error occurred while trying to upload file to bucket {} with key {}. Error: {}", bucketName,
+                         key, e.getMessage());
+            return false;
         }
     }
 
-
-    public void uploadFile(String bucketName, String key, Path file) {
-        if (s3 == null) {
-            log.error("Cannot upload file to Amazon S3 because the connection was not established");
-            return;
-        }
+    public boolean downloadFile(String bucketName, String key) {
+        Path path = Paths.get(medicationsFilePath);
         try {
-            RetryConfig config = RetryConfig.custom().maxAttempts(3).waitDuration(Duration.ofSeconds(1)).build();
-
-            Retry retry = Retry.of("id", config);
-
-            CheckedRunnable putObjectRunnable = Retry.decorateCheckedRunnable(retry, () -> {
-                log.info("Attempting to upload file to Amazon S3: {}", file);
-                s3.putObject(PutObjectRequest.builder().bucket(bucketName).key(key).build(),
-                             RequestBody.fromFile(file));
-            });
-
-            Try.run(putObjectRunnable).onFailure(e -> log.error("Failed to upload file to Amazon S3: {}", file, e));
+            s3Client.getObject(GetObjectRequest.builder().bucket(bucketName).key(key).build(),
+                               ResponseTransformer.toFile(path));
+            logger.info("File downloaded successfully from bucket {} with key {}", bucketName, key);
+            return true;
         }
-        catch (SdkClientException e) {
-            // Log the error and continue with the application
-            log.error("Failed to upload file to Amazon S3", e);
+        catch (S3Exception e) {
+            logger.error("Error occurred while trying to download file from bucket {} with key {}. Error: {}",
+                         bucketName, key, e.getMessage());
+            return false;
         }
-    }
-
-    public Path downloadFile(String bucketName, String key) throws IOException {
-        if (s3 == null) {
-            log.error("Cannot download file from Amazon S3 because the connection was not established");
-            return null;
-        }
-
-        try {
-            RetryConfig config = RetryConfig.custom().maxAttempts(3).waitDuration(Duration.ofSeconds(1)).build();
-
-            Retry retry = Retry.of("id", config);
-
-            String prefix = "medications" + Math.random() * 5;
-
-            Path file = Files.createTempFile(prefix, ".json");
-
-            CheckedFunction1<Path, Path> downloadFile = Retry.decorateCheckedFunction(retry, (Path path) -> {
-                log.info("Attempting to download file from Amazon S3: {}", key);
-                s3.getObject(GetObjectRequest.builder().bucket(bucketName).key(key).build(),
-                             ResponseTransformer.toFile(path));
-                return path;
-            });
-
-            return Try.of(() -> downloadFile.apply(file))
-                      .onFailure(e -> log.error("Failed to download file from Amazon S3: {}", key, e)).get();
-        }
-        catch (SdkClientException e) {
-            // Log the error and continue with the application
-            log.error("Failed to download file from Amazon S3", e);
-        }
-
-        return null;
     }
 }
+
+

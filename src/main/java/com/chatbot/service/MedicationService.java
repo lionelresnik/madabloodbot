@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -45,23 +44,18 @@ public class MedicationService {
     public void fillInstructions() throws IOException {
         // Try to download the file from Amazon S3
         try {
-            Path path = amazonS3Service.downloadFile(bucketName, "medications.json");
-            if (path != null) {
-                fillInstructionsFromFile(path);
-            }
-            else {
-                throw new NoSuchFileException("Path is null");
-            }
+            amazonS3Service.downloadFile(bucketName, "medications.json");
         }
         catch (Exception e) {
             log.warn("Failed to download file from Amazon S3, using local file instead", e);
-
             // If the download fails, use the local file
-            Path path = Paths.get(medicationsFilePath);
-            if (Files.exists(path)) {
-                fillInstructionsFromFile(path);
-            }
         }
+        Path path = Paths.get(medicationsFilePath);
+        if (Files.exists(path)) {
+            log.info("Filling instructions from file");
+            fillInstructionsFromFile(path);
+        }
+
     }
 
     private void fillInstructionsFromFile(Path path) throws IOException {

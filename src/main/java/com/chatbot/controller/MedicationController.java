@@ -62,11 +62,9 @@ public class MedicationController {
         Map<String, List<Medication>> response = saveFile(medications, medicationsFilePath);
         log.info("Saving file locally");
 
-        Path path = Paths.get(medicationsFilePath);
-        log.info("creating path: " + path);
 
         log.info("trying to upload file to s3");
-        amazonS3Service.uploadFile(bucketName, "medications.json", path);
+        amazonS3Service.uploadFile(bucketName, "medications.json");
 
         log.info("filling instructions from new file");
         medicationService.fillInstructions();
