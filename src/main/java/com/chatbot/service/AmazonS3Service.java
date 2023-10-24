@@ -78,7 +78,9 @@ public class AmazonS3Service {
 
             Retry retry = Retry.of("id", config);
 
-            Path file = Files.createTempFile("medications", ".json");
+            String prefix = "medications" + Math.random() * 5;
+
+            Path file = Files.createTempFile(prefix, ".json");
 
             CheckedFunction1<Path, Path> downloadFile = Retry.decorateCheckedFunction(retry, (Path path) -> {
                 log.info("Attempting to download file from Amazon S3: {}", key);
