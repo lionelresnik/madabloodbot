@@ -103,12 +103,14 @@ public class MedicationService {
             Medication medication = getInstructions(name);
 
             if (medication != null) {
+                medication.setKeyword(name);
                 found.add(medication);
             }
             else {
                 String similarName = findSimilarName(name);
                 if (similarName != null) {
                     medication = getInstructions(similarName);
+                    medication.setKeyword(name);
                     partialFound.add(medication);
                 }
                 else {

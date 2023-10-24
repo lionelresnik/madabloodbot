@@ -1,6 +1,7 @@
 package com.chatbot.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.univocity.parsers.annotations.Parsed;
 import lombok.Data;
@@ -32,6 +33,9 @@ public class Medication {
     @JsonProperty("criterion")
     private String criterion;
 
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    @JsonProperty("keyword")
+    private String keyword;
 
     @JsonProperty("donation")
     private Boolean donation;
