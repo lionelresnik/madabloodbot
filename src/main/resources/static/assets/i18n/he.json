@@ -1,9 +1,12 @@
 {
     "APP_NAME": "תרומת דם",
+    "APP_DESCRIPTION": "רוצים לתרום דם? היכנסו לבוט החכם שיעזור לכם בכמה דקות לגלות אם אתם מתאימים לתרומת דם ותגלו בקלות אם יש לכם אפשרות להציל חיים",
+    "APP_TITLE": "בידקו אם מותר לכם לתרום דם",
     "WELCOME": {
         "SMART_CHAT_FOR_DONNER": "צ׳אט חכם לתורם",
         "WELCOME_INTRO": "ברוכים הבאים לעוזר האישי שיסייע לכם לגלות האם אתם מתאימים לתרומת דם ויחסוך לכם זמן יקר.",
-        "START_CHAT": "התחילו שיחה"
+        "START_CHAT": "התחילו שיחה",
+        "SHARE_US": "שתפו אותנו"
     },
     "CHAT": {
         "BACK": "חזור",
@@ -25,7 +28,7 @@
             "SPECIFIC_ACTIVITY_LAST_12_HOURS": "האם עיסוקך כולל אחד מהבאים ב 12 השעות הבאות?<br> 1. נהיגה ברכב ציבורי<br>2. הפעלת מנוף<br>3. עבודה בגובה",
             "WEIGHT_LESS_THAN_50_KG": "האם משקלך נמוך מ 50 קג?",
             "VEGAN_VEGETARIAN": "האם הנך צמחוני או טבעוני?",
-            "QUALIFIED": "נראה שנמצאת מתאים לתרומת דם 💪<br><br>🩸 למיקומי התרמות דם ברחבי הארץ:  <a class='link' href='https://www.mdais.org/blood-donation' target='_blank'>לחצו כאן</a><br>🗓 לקביעת תור לתרומת דם:<a class='link' href='https://bd.mda.org.il/' target='_blank'>לחצו כאן</a><br><br>לקבלת התראות על מיקומי התרמות דם דרך הפייסבוק לחצו: <a class='link' href='https://www.mdais.org/blood-donation/notification' target='_blank'>כאן</a><br><b>לפניות לשירותי הדם של מד\"א</b>:<br>בוואצאפ: <a class='link' href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a class='link' href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>",
+            "QUALIFIED": "נראה שנמצאת מתאים לתרומת דם 💪<br><br>🩸 למיקומי התרמות דם ברחבי הארץ:  <a class='link' href='https://www.mdais.org/blood-donation' target='_blank'>לחצו כאן</a><br>🗓 לקביעת תור לתרומת דם: <a class='link' href='https://bd.mda.org.il/' target='_blank'>לחצו כאן</a><br><br>לקבלת התראות על מיקומי התרמות דם דרך הפייסבוק לחצו: <a class='link' href='https://www.mdais.org/blood-donation/notification' target='_blank'>כאן</a><br><b>לפניות לשירותי הדם של מד\"א</b>:<br>בוואצאפ: <a class='link' href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a class='link' href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>",
             "DISQUALIFIED": "תודה על הנכונות לתרום דם 🙏<br><br>לצערנו, על פי תשובותיך נכון לעכשיו אין אפשרות לתרום מטעמים רפואיים.<br><br> לשאלות ותהיות נוספות אפשר לפנות למוקד שירותי הדם של מד״א:<br> בוואצאפ: <a class='link' href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a class='link' href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>"
         },
         "FEMALE": {
@@ -42,7 +45,7 @@
             "SPECIFIC_ACTIVITY_LAST_12_HOURS": "האם עיסוקך כולל אחד מהבאים ב 12 השעות הבאות?<br> 1. נהיגה ברכב ציבורי<br>2. הפעלת מנוף<br>3. עבודה בגובה",
             "WEIGHT_LESS_THAN_50_KG": "האם משקלך נמוך מ 50 קג?",
             "PREGNANCY": "האם הנך <b>בהריון</b> או ילדת ב <b>6 החודשים</b> האחרונים?",
-            "QUALIFIED": "נראה שנמצאת מתאימה לתרומת דם 💪<br><br>🩸 למיקומי התרמות דם ברחבי הארץ:  <a class='link' href='https://www.mdais.org/blood-donation' target='_blank'>לחצו כאן</a><br>🗓 לקביעת תור לתרומת דם:<a class='link' href='https://bd.mda.org.il/' target='_blank'>לחצו כאן</a><br><br>לקבלת התראות על מיקומי התרמות דם דרך הפייסבוק לחצו: <a class='link' href='https://www.mdais.org/blood-donation/notification' target='_blank'>כאן</a><br><b>לפניות לשירותי הדם של מד\"א</b>:<br>בוואצאפ: <a class='link' href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a class='link' href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>",
+            "QUALIFIED": "נראה שנמצאת מתאימה לתרומת דם 💪<br><br>🩸 למיקומי התרמות דם ברחבי הארץ:  <a class='link' href='https://www.mdais.org/blood-donation' target='_blank'>לחצו כאן</a><br>🗓 לקביעת תור לתרומת דם: <a class='link' href='https://bd.mda.org.il/' target='_blank'>לחצו כאן</a><br><br>לקבלת התראות על מיקומי התרמות דם דרך הפייסבוק לחצו: <a class='link' href='https://www.mdais.org/blood-donation/notification' target='_blank'>כאן</a><br><b>לפניות לשירותי הדם של מד\"א</b>:<br>בוואצאפ: <a class='link' href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a class='link' href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>",
             "DISQUALIFIED": "תודה על הנכונות לתרום דם 🙏<br><br>לצערנו, על פי תשובותיך נכון לעכשיו אין אפשרות לתרום מטעמים רפואיים.<br><br> לשאלות ותהיות נוספות אפשר לפנות למוקד שירותי הדם של מד״א:<br> בוואצאפ: <a class='link' href='https://wa.me/97235300400' target='_blank'>03-5300400</a> <br>במייל: <a class='link' href='mailto:b101b@mda.org.il' target='_blank'>b101b@mda.org.il</a>"
         }
     },
@@ -57,6 +60,8 @@
         "MALE": "זכר",
         "FEMALE": "נקבה",
         "YES": "כן",
-        "NO": "לא"
+        "NO": "לא",
+        "RESTART_NEW_QUESTIONNAIRE": "התחל שאלון חדש <img src='/assets/icon/restart.svg'>",
+        "HELP_US_SHARE": "עזרו לנו להגיע לתורמים נוספים <img src='/assets/icon/share.svg'>"
     }
 }
