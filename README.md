@@ -19,7 +19,7 @@ mvn spring-boot:run
 
 ## License
 
-This project is licensed under a private License for the moment, but will be donated to "Mqguen David Adom". 
+This project is licensed under a private License for the moment, but will be donated to "Maguen David Adom". 
 
 ---
 
