@@ -1,25 +1,34 @@
 # Java Spring Mada-Blood-Bot Project
 
-This project is a simple chatbot implemented using Java and the Spring framework. The mada-blood-bot uses a finite state machine (FSM) to manage the conversation flow and can ask different questions based on the user's responses.
+This project is a chatbot built using **Java 11**, **Spring Boot**, and **Gradle**. The **Mada-Blood-Bot** leverages a **finite state machine (FSM)** to manage conversation flow, dynamically adjusting questions based on user responses.
 
-## Project Structure
-
-## Prerequisites
-- Java 11 or higher
-- Gradle
+## Technologies Used
+- **Java 11**
+- **Spring Boot 2.5.5**
+- **Gradle** (Build Automation)
+- **OpenCSV & Univocity-Parsers** (CSV Processing)
+- **AWS SDK (S3)**
+- **Resilience4j** (Retry Mechanism)
+- **Log4j** (Logging)
+- **Spring Security & JWT** (Authentication & Authorization)
 
 ## Setup
+### Prerequisites
+Ensure you have the following installed on your machine:
+- Java 11
+- Gradle (or use the included Gradle Wrapper)
 
-To run the project, you will need to have Java and Maven installed on your machine. You can run the project using the following command:
+### Running the Project
+To build and run the project, use the following command:
 
+```sh
+./gradlew bootRun
 ```
-mvn spring-boot:run
-```
+
 
 
 ## License
+This project is currently licensed under a **private license**. However, it is intended to be **donated to "Maguen David Adom"** in the future.
 
-This project is licensed under a private License for the moment, but will be donated to "Maguen David Adom". 
-
----
-
+For inquiries, contact:  
+📧 **Lionel.Resnik@outlook.com**
